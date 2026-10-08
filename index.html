@@ -112,64 +112,21 @@
     -ms-overflow-style: none;
     scrollbar-width: none;
   }
-  /* ===== RESPONSIVIDADE MOBILE ===== */
-  html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
-  body { overflow-wrap: break-word; overflow-x: hidden; }
-  img, svg, video { max-width: 100%; }
-  .min-h-screen { min-height: 100vh; min-height: 100dvh; }
-  button, a, label, select { touch-action: manipulation; }
-  /* Campos precisam permitir digitação (body tem user-select:none) */
-  input, textarea, select { user-select: text; -webkit-user-select: text; max-width: 100%; }
-  input[type=checkbox] { flex-shrink: 0; }
-  /* Evita textos/etiquetas colados ou estourando em linhas com justify-between */
-  .flex.justify-between { gap: .75rem; }
-  .flex.justify-between > * { min-width: 0; }
-  .flex.justify-between > span.rounded-full { flex-shrink: 0; white-space: nowrap; }
-  input[type=date], input[type=time] { min-height: 3rem; -webkit-appearance: none; appearance: none; }
-  .pb-safe { padding-bottom: max(.25rem, env(safe-area-inset-bottom)); }
 
-  /* Cabeçalho com medidas em px: não estoura quando a fonte é ampliada */
-  .app-header { position: sticky; top: 0; z-index: 30; background: rgba(255,255,255,.94); -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px); border-bottom: 1px solid #e2e8f0; padding-top: env(safe-area-inset-top); }
-  body.hc .app-header { background: #000; border-color: #333; }
-  .app-header-in { max-width: 80rem; margin: 0 auto; padding: 0 max(12px, env(safe-area-inset-left)) 0 max(12px, env(safe-area-inset-right)); height: 60px; display: flex; align-items: center; justify-content: space-between; gap: 8px; }
-  .brand { display: flex; align-items: center; gap: 10px; min-width: 0; cursor: pointer; }
-  .brand-logo { width: 40px; height: 40px; border-radius: 12px; background: linear-gradient(135deg,#0d9488,#2dd4bf); color: #fff; display: flex; align-items: center; justify-content: center; font-size: 24px; flex-shrink: 0; box-shadow: 0 6px 14px rgba(20,184,166,.3); }
-  .brand-txt { display: flex; flex-direction: column; line-height: 1.1; min-width: 0; }
-  .brand-txt b { font-family: 'Lexend', sans-serif; font-size: 18px; color: #0f766e; }
-  .brand-txt span { font-size: 11px; font-weight: 700; color: #115e59; background: #ccfbf1; border-radius: 999px; padding: 2px 8px; margin-top: 3px; align-self: flex-start; }
-  body.hc .brand-txt b { color: #facc15; }
-  .hdr-actions { display: flex; gap: 4px; flex-shrink: 0; }
-  .hdr-btn { min-width: 40px; height: 40px; padding: 0 8px; border: 1px solid #e2e8f0; border-radius: 12px; background: #fff; color: #334155; display: inline-flex; align-items: center; justify-content: center; gap: 4px; font-weight: 700; font-size: 16px; line-height: 1; cursor: pointer; }
-  .hdr-btn i { font-size: 20px; }
-  .hdr-btn:active { transform: scale(.95); }
-  .hdr-btn.accent { color: #0f766e; }
-  .hdr-btn.danger { color: #e11d48; border-color: transparent; background: transparent; }
-  .hdr-btn small { font-size: 11px; font-weight: 700; }
-  .hdr-btn .lbl { display: none; font-size: 12px; font-weight: 800; letter-spacing: .02em; }
-  body.hc .hdr-btn { background: #121212; color: #fff; border-color: #444; }
-  @media (min-width: 640px) {
-    .app-header-in { padding-left: 24px; padding-right: 24px; gap: 12px; }
-    .hdr-actions { gap: 8px; }
-    .hdr-btn { min-width: 44px; height: 44px; }
-    .hdr-btn .lbl { display: inline; }
+  /* ===== Ajustes para celular ===== */
+  html{-webkit-text-size-adjust:100%}
+  *{-webkit-tap-highlight-color:transparent}
+  button,a,[onclick]{touch-action:manipulation}
+  body{overscroll-behavior-y:none}
+  @supports(height:100dvh){.min-h-screen{min-height:100dvh}}
+  @media (max-width:767px){
+    input,select,textarea,.field{font-size:16px !important}
+    .field,.auth-input{min-height:48px}
+    main{padding-bottom:calc(6.5rem + env(safe-area-inset-bottom)) !important}
+    .fixed.bottom-0{padding-bottom:env(safe-area-inset-bottom)}
+    main button{min-height:44px}
+    main h1{font-size:1.5rem;line-height:2rem}
   }
-  @media (max-width: 379px) { .brand-txt b { display: none; } .brand-txt span { margin-top: 0; } }
-  @media (max-width: 339px) { .brand-txt { display: none; } }
-
-  /* Celular e tablet: conteúdo respeita a barra inferior e áreas seguras */
-  @media (max-width: 1023px) {
-    main { padding-bottom: calc(6.5rem + env(safe-area-inset-bottom)) !important; }
-  }
-  /* 16px nos campos evita o zoom automático do iOS ao focar */
-  @media (max-width: 767px) {
-    .field, .auth-input, input:not([type=checkbox]):not([type=file]), select, textarea { font-size: 16px !important; }
-    .field { padding: .85rem .75rem; }
-    main { padding-left: max(1rem, env(safe-area-inset-left)) !important; padding-right: max(1rem, env(safe-area-inset-right)) !important; }
-  }
-  @media (max-width: 380px) {
-    h1.font-display { font-size: 1.35rem; }
-  }
-  @media (prefers-reduced-motion: reduce) { * { animation: none !important; transition: none !important; } }
 </style>
 <link rel="manifest" href="manifest.webmanifest">
 <meta name="apple-mobile-web-app-capable" content="yes">
@@ -360,6 +317,7 @@ async function voice() {
 const esc = t => String(t || '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 const go = t => { tab = t; render(); window.scrollTo({ top: 0, behavior: 'smooth' }); };
 const setRole = r => {
+  if (authSession === 'elder' && r !== 'elder') return;
   role = r;
   if (user) localStorage.setItem('cuidar_role_' + user.uid, r);
   else sessionStorage.setItem('role', r);
@@ -427,7 +385,7 @@ function renderBottomNav() {
   ];
 
   return `
-  <div class="lg:hidden fixed bottom-0 left-0 right-0 z-40 bg-white/95 dark:bg-slate-900/95 backdrop-blur-lg border-t border-slate-200 dark:border-slate-800 pb-safe">
+  <div class="md:hidden fixed bottom-0 left-0 right-0 z-40 bg-white/95 dark:bg-slate-900/95 backdrop-blur-lg border-t border-slate-200 dark:border-slate-800 pb-safe">
     <div class="grid grid-cols-${items.length} h-16">
       ${items.map(item => `
         <button onclick="go('${item.id}')" class="flex flex-col items-center justify-center space-y-1 ${tab === item.id ? 'text-teal-600 dark:text-teal-400 font-bold' : 'text-slate-500 dark:text-slate-400'} ${item.bad ? 'text-rose-600 dark:text-rose-400' : ''}">
@@ -457,7 +415,7 @@ function renderSidebar() {
   ];
 
   return `
-  <aside class="hidden lg:flex flex-col w-64 bg-white dark:bg-slate-900 border-r border-slate-200 dark:border-slate-800 p-4 shrink-0 min-h-[calc(100vh-4rem)]">
+  <aside class="hidden md:flex flex-col w-64 bg-white dark:bg-slate-900 border-r border-slate-200 dark:border-slate-800 p-4 shrink-0 min-h-[calc(100vh-4rem)]">
     <div class="mb-6 p-3 rounded-2xl bg-teal-50 dark:bg-teal-950/40 border border-teal-100 dark:border-teal-900/50 flex items-center space-x-3">
       <div class="text-3xl">${S.elder.avatar || '👵'}</div>
       <div class="overflow-hidden">
@@ -495,8 +453,8 @@ async function hashText(value){
   return [...new Uint8Array(hash)].map(b=>b.toString(16).padStart(2,'0')).join('');
 }
 function hasFamilyAccount(){ return !!(S.account?.owner?.email && S.account?.owner?.passwordHash); }
-function signIn(roleName='fam'){ role=roleName; sessionStorage.setItem('role',roleName); authSession='fam'; sessionStorage.setItem('cuidar_auth','fam'); tab='home'; render(); }
-function signOut(){ role=null; authSession=null; sessionStorage.removeItem('role'); sessionStorage.removeItem('cuidar_auth'); tab='home'; render(); }
+function signIn(roleName='fam'){ authMode='login'; role=roleName; sessionStorage.setItem('role',roleName); authSession='fam'; sessionStorage.setItem('cuidar_auth','fam'); tab='home'; render(); }
+function signOut(){ authMode='login'; role=null; authSession=null; sessionStorage.removeItem('role'); sessionStorage.removeItem('cuidar_auth'); tab='home'; render(); }
 window.openAuth=function(mode){authMode=mode;render();};
 window.createFamilyAccount=async function(){
   const name=$('#regName')?.value.trim(), email=$('#regEmail')?.value.trim().toLowerCase(), password=$('#regPassword')?.value||'', elderName=$('#regElder')?.value.trim();
@@ -506,9 +464,10 @@ window.createFamilyAccount=async function(){
   S.account.owner={name,email,passwordHash:await hashText(password),createdAt:new Date().toISOString(),provider:'email'};
   S.account.elderAccess={enabled:true,code,label:elderName};
   S.elder.name=elderName;
+  if(!S.elder.accessPin) S.elder.accessPin=genUniquePin();
   S.audit.unshift(`${new Date().toLocaleString('pt-BR')} — Conta da família criada para ${name}; perfil do idoso criado dentro da conta.`);
   save();
-  alert(`Conta criada com sucesso!\n\nO perfil de ${elderName} está dentro da sua conta da família.\n\nCódigo interno do perfil do idoso: ${code}`);
+  alert(`Conta criada com sucesso!\n\nO perfil de ${elderName} está dentro da sua conta da família.\n\nCódigo interno do perfil do idoso: ${code}\n\nPIN para ${elderName} entrar: ${S.elder.accessPin}\n(Anote. Depois você vê o PIN em Conta & Segurança.)`);
   signIn('fam');
 };
 window.loginFamily=async function(){
@@ -526,6 +485,64 @@ window.backToFamily=function(){
   if(authSession!=='fam') return signOut();
   S.audit.unshift(`${new Date().toLocaleString('pt-BR')} — Familiar retomou o painel administrativo.`); save(); signIn('fam');
 };
+
+/* ===== PIN de acesso do idoso ===== */
+const PIN_LEN = 6;
+function genUniquePin(){
+  const used = new Set((S.elders||[]).map(e=>e.accessPin).filter(Boolean));
+  let pin;
+  do {
+    const n = crypto.getRandomValues(new Uint32Array(1))[0] % 900000 + 100000;
+    pin = String(n);
+  } while (used.has(pin));
+  return pin;
+}
+window.pinVisible = window.pinVisible || {};
+window.togglePin = function(id){ window.pinVisible[id] = !window.pinVisible[id]; render(); };
+window.regenPin = function(id){
+  if(authSession!=='fam' || role!=='fam') return alert('Somente o familiar responsável pode gerar o PIN.');
+  const e=S.elders.find(x=>x.id===id); if(!e) return;
+  if(e.accessPin && !confirm(`Gerar um novo PIN para ${e.name}? O PIN atual deixará de funcionar.`)) return;
+  e.accessPin = genUniquePin();
+  S.audit.unshift(`${new Date().toLocaleString('pt-BR')} — Novo PIN de acesso gerado para ${e.name}.`);
+  save(); window.pinVisible[id]=true; render();
+};
+window.pinCard = function(){
+  if(role!=='fam') return '';
+  const rows = S.elders.map(e=>{
+    const shown = !!window.pinVisible[e.id];
+    const pin = e.accessPin ? (shown ? e.accessPin.replace(/(\d{3})(\d{3})/,'$1 $2') : '••• •••') : 'sem PIN';
+    return `<div class="p-3 rounded-2xl bg-slate-50 dark:bg-slate-900 flex items-center justify-between gap-3 flex-wrap">
+      <div><b>${esc(e.name)}</b><p class="text-xs text-slate-500">PIN para o idoso entrar</p></div>
+      <div class="flex items-center gap-2">
+        <span class="font-display text-2xl font-bold tracking-widest text-teal-700 dark:text-teal-300">${pin}</span>
+        <button onclick="togglePin('${e.id}')" class="px-3 py-2 rounded-xl border text-xs font-bold">${shown?'Ocultar':'Mostrar'}</button>
+        <button onclick="regenPin('${e.id}')" class="px-3 py-2 rounded-xl bg-teal-600 text-white text-xs font-bold">${e.accessPin?'Gerar novo':'Gerar PIN'}</button>
+      </div></div>`;
+  }).join('');
+  return `<section class="bg-white dark:bg-slate-800 rounded-3xl p-5 border border-slate-200 dark:border-slate-700 shadow-sm"><h2 class="font-display font-bold text-lg mb-4">PIN de acesso do idoso</h2><p class="text-xs text-slate-500 mb-3">Com este PIN de ${PIN_LEN} números o idoso entra direto no Modo Idoso, na tela de login, sem precisar da senha da família. Cada idoso tem o seu PIN.</p><div class="space-y-2">${rows}</div></section>`;
+};
+function signInElder(){ role='elder'; authSession='elder'; sessionStorage.setItem('role','elder'); sessionStorage.setItem('cuidar_auth','elder'); tab='home'; render(); }
+window.loginElderPin = function(){
+  const LK='cuidar_pin_lock';
+  let lock={}; try{ lock=JSON.parse(localStorage.getItem(LK)||'{}'); }catch(_){}
+  if(lock.until && Date.now()<lock.until) return alert(`Muitas tentativas erradas. Tente de novo em ${Math.ceil((lock.until-Date.now())/1000)} segundos.`);
+  if(!hasFamilyAccount()) return alert('Ainda não existe uma conta da família neste aparelho. Peça ao familiar para criar a conta e gerar o seu PIN.');
+  const raw=($('#elderPin')?.value||'').replace(/\D/g,'');
+  if(raw.length!==PIN_LEN) return alert(`Digite os ${PIN_LEN} números do PIN.`);
+  const e=S.elders.find(x=>x.accessPin===raw);
+  if(!e){
+    const fails=(lock.fails||0)+1;
+    localStorage.setItem(LK,JSON.stringify(fails>=5?{fails:0,until:Date.now()+60000}:{fails,until:0}));
+    return alert(fails>=5?'PIN incorreto várias vezes. Aguarde 1 minuto.':'PIN incorreto. Confira com sua família.');
+  }
+  localStorage.removeItem(LK);
+  S.activeElderId=e.id; S.elder=e; S.meds=e.meds; S.logs=e.logs; S.alerts=e.alerts; S.tol=e.tol??30;
+  S.account.elderAccess={enabled:true,code:e.code||S.account.elderAccess?.code,label:e.name};
+  S.audit.unshift(`${new Date().toLocaleString('pt-BR')} — ${e.name} entrou com PIN.`);
+  save(); signInElder();
+};
+window.exitSession = function(){ if(authSession==='elder') return signOut(); return exitDemo(); };
 window.googleLogin=function(){
   alert('O botão Google está preparado na interface. Para login Google real, é necessário conectar o Google Identity Services com o Client ID OAuth do projeto e um backend de autenticação.');
 };
@@ -573,7 +590,7 @@ function viewAuth(){
   return `<div class="min-h-screen flex flex-col lg:flex-row bg-slate-50 dark:bg-slate-900">
 
     <!-- Painel da marca -->
-    <section class="relative overflow-hidden lg:w-[46%] xl:w-1/2 bg-gradient-to-br from-teal-700 via-teal-600 to-emerald-600 text-white px-6 pt-10 pb-14 lg:p-14 flex flex-col justify-between">
+    <section class="relative overflow-hidden lg:w-[46%] xl:w-1/2 bg-gradient-to-br from-teal-700 via-teal-600 to-emerald-600 text-white px-5 pt-7 pb-12 lg:p-14 flex flex-col justify-between">
       <div class="absolute -top-24 -right-24 w-80 h-80 rounded-full bg-white/10 blur-2xl"></div>
       <div class="absolute -bottom-32 -left-20 w-96 h-96 rounded-full bg-emerald-300/20 blur-3xl"></div>
       <div class="relative flex items-center gap-3">
@@ -615,6 +632,12 @@ function viewAuth(){
           </div>
           ${divider}${google}`}
         </div>
+
+        ${register?'':`<div class="mt-5 bg-white dark:bg-slate-800 rounded-3xl p-6 shadow-xl shadow-slate-900/10 border border-slate-100 dark:border-slate-700">
+          <div class="flex items-center gap-3 mb-3"><div class="w-11 h-11 rounded-2xl bg-teal-100 text-teal-700 flex items-center justify-center text-2xl"><i class="ph-bold ph-key"></i></div><div><h2 class="font-display text-xl font-bold text-slate-900 dark:text-white">Sou idoso</h2><p class="text-sm text-slate-500 dark:text-slate-400">Digite o PIN que sua família criou.</p></div></div>
+          <input id="elderPin" type="text" inputmode="numeric" pattern="[0-9]*" maxlength="6" autocomplete="off" placeholder="000000" onkeydown="if(event.key==='Enter')loginElderPin()" oninput="this.value=this.value.replace(/\D/g,'')" class="w-full h-16 text-center text-3xl font-bold tracking-[.5em] rounded-2xl border-2 border-slate-300 dark:border-slate-600 bg-slate-50 dark:bg-slate-900 text-slate-900 dark:text-white focus:outline-none focus:border-teal-600">
+          <button type="button" onclick="loginElderPin()" class="mt-3 w-full h-14 rounded-2xl bg-slate-900 dark:bg-white hover:opacity-90 text-white dark:text-slate-900 font-bold text-lg flex items-center justify-center gap-2 transition-all active:scale-[.99]">ENTRAR COM PIN <i class="ph-bold ph-arrow-right"></i></button>
+        </div>`}
 
         <button type="button" onclick="goDemo()" class="mt-5 w-full h-12 rounded-2xl border border-dashed border-slate-300 dark:border-slate-600 text-sm font-semibold text-slate-600 dark:text-slate-300 hover:border-teal-500 hover:text-teal-700 dark:hover:text-teal-300 flex items-center justify-center gap-2 transition-colors"><i class="ph-bold ph-play-circle text-lg"></i> Só quero conhecer o app (demonstração)</button>
       </div>
@@ -1166,7 +1189,7 @@ function render() {
     <div class="flex-1 max-w-7xl w-full mx-auto flex">
       ${renderSidebar()}
       
-      <main class="flex-1 p-4 sm:p-6 lg:p-8 pb-28 lg:pb-8 overflow-x-hidden">
+      <main class="flex-1 p-4 sm:p-6 lg:p-8 pb-24 md:pb-8 overflow-x-hidden">
         ${content}
       </main>
     </div>
@@ -1199,7 +1222,7 @@ function render() {
     S.activeElderId=S.activeElderId || S.elders[0].id;
     const active=S.elders.find(e=>e.id===S.activeElderId)||S.elders[0];
     S.elder=active; S.meds=active.meds||[]; S.logs=active.logs||[]; S.alerts=active.alerts||[]; S.tol=active.tol??30;
-    S.elders.forEach(e=>{e.meds=e.meds||[];e.logs=e.logs||[];e.alerts=e.alerts||[];e.tol=e.tol??30;});
+    S.elders.forEach(e=>{e.meds=e.meds||[];e.logs=e.logs||[];e.alerts=e.alerts||[];e.tol=e.tol??30;if(!e.accessPin)e.accessPin=genUniquePin();});
     S.documents = Array.isArray(S.documents) ? S.documents : [];
     S.caregivers = Array.isArray(S.caregivers) ? S.caregivers : [{...S.fam, id:'fam-1', status:'ativo'}];
     S.audit = Array.isArray(S.audit) ? S.audit : [];
@@ -1229,10 +1252,10 @@ function render() {
     const age=Number(prompt('Idade:')||0);
     const id='elder-'+Date.now();
     const code=('CUIDAR-'+Math.random().toString(36).slice(2,8)).toUpperCase();
-    const e={id,name:name.trim(),age:age||0,avatar:'👵',meds:[],logs:[],alerts:[],tol:30,code};
+    const e={id,name:name.trim(),age:age||0,avatar:'👵',meds:[],logs:[],alerts:[],tol:30,code,accessPin:genUniquePin()};
     S.elders.push(e); save();
     S.activeElderId=id; S.elder=e; S.meds=e.meds; S.logs=e.logs; S.alerts=e.alerts; S.tol=e.tol;
-    S.audit.unshift(`${new Date().toLocaleString('pt-BR')} — Novo perfil de idoso criado: ${e.name}.`); save(); render();
+    S.audit.unshift(`${new Date().toLocaleString('pt-BR')} — Novo perfil de idoso criado: ${e.name}.`); save(); window.pinVisible[e.id]=true; render(); alert(`Perfil de ${e.name} criado.\n\nPIN para ${e.name} entrar: ${e.accessPin}\n\nAnote e entregue ao idoso. Você pode ver o PIN depois em Conta & Segurança.`);
   };
   window.removeElder = function(id){
     if(!isFamily() || S.elders.length<=1) return alert('Mantenha pelo menos um perfil de idoso.');
@@ -1395,8 +1418,8 @@ function render() {
     const admin=isFamily();
     return `<div class="space-y-6">
       <div class="flex flex-wrap items-center justify-between gap-3"><div><h1 class="font-display text-2xl font-bold">Medicamentos</h1><p class="text-xs text-slate-500">Cadastro completo, estoque e horários recorrentes.</p></div><button onclick="go('account')" class="px-4 py-2 rounded-xl border font-bold text-sm">Privacidade & Backup</button></div>
-      <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">${S.meds.map(m=>{const a=adherence(m);return `<div class="bg-white dark:bg-slate-800 rounded-3xl p-5 border border-slate-200 dark:border-slate-700 shadow-sm space-y-4"><div class="flex justify-between gap-3"><div class="flex gap-3"><div class="w-12 h-12 rounded-2xl bg-teal-50 dark:bg-teal-950 flex items-center justify-center text-2xl">${m.icon||'💊'}</div><div><h3 class="font-bold">${esc(m.name)} ${esc(m.dose)}</h3><p class="text-xs text-slate-500">${esc(m.instructions||'Uso conforme orientação profissional')}</p></div></div><button onclick="removeMed(${m.id})" class="text-rose-500 p-3 -m-1 shrink-0 text-lg" title="Remover" aria-label="Remover medicamento"><i class="ph-bold ph-trash"></i></button></div><div class="grid grid-cols-2 gap-2 text-xs"><div class="p-3 rounded-xl bg-slate-50 dark:bg-slate-900">Horários<strong class="block text-sm">${m.times.join(', ')}</strong></div><div class="p-3 rounded-xl bg-slate-50 dark:bg-slate-900">Adesão 30d<strong class="block text-sm text-teal-600">${a.pct}%</strong></div><div class="p-3 rounded-xl bg-slate-50 dark:bg-slate-900">Estoque<strong class="block text-sm ${m.stock<=m.min?'text-rose-600':''}">${m.stock} ${m.stockUnit}</strong></div><div class="p-3 rounded-xl bg-slate-50 dark:bg-slate-900">Previsão<strong class="block text-sm">${endDate(m)}</strong></div></div><div class="flex gap-2"><button onclick="updateStock(${m.id},1)" class="flex-1 py-3 rounded-xl border font-bold">+ estoque</button><button onclick="updateStock(${m.id},-1)" class="flex-1 py-3 rounded-xl border font-bold">- estoque</button></div></div>`}).join('')}</div>
-      ${admin?card('Adicionar medicamento',`<div class="space-y-3"><div class="p-4 rounded-2xl bg-teal-50 dark:bg-teal-950/40 text-xs"><b>Cadastro por foto</b><input type="file" accept="image/*" capture="environment" onchange="photo(this)" class="block mt-2 w-full text-xs"><p id="ocr" class="mt-2"></p></div><input id="n" class="field" placeholder="Nome do medicamento"><input id="d" class="field" placeholder="Dosagem (ex.: 50 mg)"><div class="grid grid-cols-1 sm:grid-cols-2 gap-3"><input id="times" class="field" placeholder="Horários: 08:00, 20:00"><input id="p" type="number" min="1" value="1" class="field" placeholder="Qtd. por tomada"></div><div class="grid grid-cols-1 sm:grid-cols-2 gap-3"><input id="q" type="number" min="0" value="30" class="field" placeholder="Estoque"><input id="minStock" type="number" min="0" value="7" class="field" placeholder="Estoque mínimo"></div><div><label class="text-xs font-bold">Dias da semana</label><div class="grid grid-cols-7 gap-1 mt-2">${dayLabels.map((d,i)=>`<label class="text-center text-[10px] p-2 rounded-lg bg-slate-50 dark:bg-slate-900"><input type="checkbox" name="days" value="${i}" checked><span class="block">${d}</span></label>`).join('')}</div></div><div class="grid grid-cols-1 sm:grid-cols-2 gap-3"><label class="block text-xs font-bold">Início<input id="startDate" type="date" value="${today()}" class="field mt-1"></label><label class="block text-xs font-bold">Término (opcional)<input id="endDate" type="date" class="field mt-1"></label></div><textarea id="instructions" class="field" rows="2" placeholder="Orientações: após refeição, em jejum, etc."></textarea><button onclick="addMed()" class="w-full py-3.5 rounded-xl bg-teal-600 text-white font-bold">Salvar medicamento</button></div>`):''}
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">${S.meds.map(m=>{const a=adherence(m);return `<div class="bg-white dark:bg-slate-800 rounded-3xl p-5 border border-slate-200 dark:border-slate-700 shadow-sm space-y-4"><div class="flex justify-between gap-3"><div class="flex gap-3"><div class="w-12 h-12 rounded-2xl bg-teal-50 dark:bg-teal-950 flex items-center justify-center text-2xl">${m.icon||'💊'}</div><div><h3 class="font-bold">${esc(m.name)} ${esc(m.dose)}</h3><p class="text-xs text-slate-500">${esc(m.instructions||'Uso conforme orientação profissional')}</p></div></div><button onclick="removeMed(${m.id})" class="text-rose-500 p-2" title="Remover"><i class="ph-bold ph-trash"></i></button></div><div class="grid grid-cols-2 gap-2 text-xs"><div class="p-3 rounded-xl bg-slate-50 dark:bg-slate-900">Horários<strong class="block text-sm">${m.times.join(', ')}</strong></div><div class="p-3 rounded-xl bg-slate-50 dark:bg-slate-900">Adesão 30d<strong class="block text-sm text-teal-600">${a.pct}%</strong></div><div class="p-3 rounded-xl bg-slate-50 dark:bg-slate-900">Estoque<strong class="block text-sm ${m.stock<=m.min?'text-rose-600':''}">${m.stock} ${m.stockUnit}</strong></div><div class="p-3 rounded-xl bg-slate-50 dark:bg-slate-900">Previsão<strong class="block text-sm">${endDate(m)}</strong></div></div><div class="flex gap-2"><button onclick="updateStock(${m.id},1)" class="flex-1 py-2 rounded-xl border font-bold">+ estoque</button><button onclick="updateStock(${m.id},-1)" class="flex-1 py-2 rounded-xl border font-bold">- estoque</button></div></div>`}).join('')}</div>
+      ${admin?card('Adicionar medicamento',`<div class="space-y-3"><div class="p-4 rounded-2xl bg-teal-50 dark:bg-teal-950/40 text-xs"><b>Cadastro por foto</b><input type="file" accept="image/*" capture="environment" onchange="photo(this)" class="block mt-2 w-full text-xs"><p id="ocr" class="mt-2"></p></div><input id="n" class="field" placeholder="Nome do medicamento"><input id="d" class="field" placeholder="Dosagem (ex.: 50 mg)"><div class="grid grid-cols-2 gap-3"><input id="times" class="field" placeholder="Horários: 08:00, 20:00"><input id="p" type="number" min="1" value="1" class="field" placeholder="Qtd. por tomada"></div><div class="grid grid-cols-2 gap-3"><input id="q" type="number" min="0" value="30" class="field" placeholder="Estoque"><input id="minStock" type="number" min="0" value="7" class="field" placeholder="Estoque mínimo"></div><div><label class="text-xs font-bold">Dias da semana</label><div class="grid grid-cols-7 gap-1 mt-2">${dayLabels.map((d,i)=>`<label class="text-center text-[10px] p-2 rounded-lg bg-slate-50 dark:bg-slate-900"><input type="checkbox" name="days" value="${i}" checked><span class="block">${d}</span></label>`).join('')}</div></div><div class="grid grid-cols-2 gap-3"><input id="startDate" type="date" value="${today()}" class="field"><input id="endDate" type="date" class="field"></div><textarea id="instructions" class="field" rows="2" placeholder="Orientações: após refeição, em jejum, etc."></textarea><button onclick="addMed()" class="w-full py-3.5 rounded-xl bg-teal-600 text-white font-bold">Salvar medicamento</button></div>`):''}
     </div>`;
   };
 
@@ -1419,7 +1442,7 @@ function render() {
 
   window.viewAccount = function(){
     const notif=('Notification' in window)?Notification.permission:'unsupported';
-    return `<div class="space-y-6"><h1 class="font-display text-2xl font-bold">Conta da família</h1>${card('Responsável',`<p class="text-sm"><b>${esc(S.account.owner?.name||S.fam.name)}</b><br><span class="text-xs text-slate-500">${esc(S.account.owner?.email||'')}</span></p>`)}${card('Perfis dos idosos',`<div class="space-y-2">${S.elders.map(e=>`<div class="p-3 rounded-2xl bg-slate-50 dark:bg-slate-900 flex flex-wrap items-center justify-between gap-3"><div><b>${esc(e.name)}</b><p class="text-xs text-slate-500">${e.age?e.age+' anos':'Idade não informada'} ${e.id===S.activeElderId?'· ativo':''}</p></div><div class="flex gap-2 flex-wrap"><button onclick="selectElder('${e.id}')" class="px-3 py-2 rounded-xl bg-teal-600 text-white text-xs font-bold">Selecionar</button>${S.elders.length>1?`<button onclick="removeElder('${e.id}')" class="px-3 py-2 rounded-xl border border-rose-200 text-rose-600 text-xs font-bold">Remover</button>`:''}</div></div>`).join('')}</div><button onclick="addElder()" class="mt-3 w-full py-3 rounded-xl border-2 border-dashed border-teal-300 text-teal-700 font-bold">+ ADICIONAR OUTRO IDOSO</button>`)}${card('Permissões do idoso',`<div class="space-y-2 text-sm"><div class="flex justify-between p-3 rounded-xl bg-slate-50 dark:bg-slate-900"><span>Ver medicamentos</span><b>Permitido</b></div><div class="flex justify-between p-3 rounded-xl bg-slate-50 dark:bg-slate-900"><span>Confirmar dose</span><b>Permitido</b></div><div class="flex justify-between p-3 rounded-xl bg-slate-50 dark:bg-slate-900"><span>Cadastrar/editar medicamento</span><b class="text-rose-600">Bloqueado</b></div><div class="flex justify-between p-3 rounded-xl bg-slate-50 dark:bg-slate-900"><span>Alterar estoque</span><b class="text-rose-600">Bloqueado</b></div><div class="flex justify-between p-3 rounded-xl bg-slate-50 dark:bg-slate-900"><span>Alterar conta</span><b class="text-rose-600">Bloqueado</b></div></div>`)}${card('Perfil local',`<div class="grid grid-cols-1 md:grid-cols-2 gap-3"><input id="elderName" class="field" value="${esc(S.elder.name)}" placeholder="Nome"><input id="elderAge" class="field" type="number" value="${S.elder.age}" placeholder="Idade"></div><button onclick="S.elder.name=$('#elderName').value;S.elder.age=+$('#elderAge').value||S.elder.age;save();render()" class="mt-3 px-4 py-2 rounded-xl bg-teal-600 text-white font-bold">Salvar perfil</button>`)}${card('Segurança da conta',`<p class="text-xs text-slate-500 mb-3">A senha pertence à conta do familiar. O idoso não altera senha, conta, medicamentos ou configurações administrativas.</p><div class="space-y-2"><input id="currentPassword" type="password" class="field" placeholder="Senha atual"><input id="newPassword" type="password" class="field" placeholder="Nova senha (mínimo 6 caracteres)"><input id="confirmPassword" type="password" class="field" placeholder="Confirmar nova senha"><button onclick="changePassword()" class="w-full py-3 rounded-xl bg-teal-600 text-white font-bold">ALTERAR SENHA</button></div><div class="mt-4 pt-4 border-t border-slate-200 dark:border-slate-700"><p class="text-xs text-slate-500 mb-2">PIN local deste dispositivo</p><button onclick="setPin()" class="px-4 py-2 rounded-xl border font-bold">${S.account.pinHash?'Alterar PIN':'Criar PIN'}</button></div>`)}${card('Notificações e voz',`<div class="space-y-3"><div class="text-xs">Permissão do navegador: <b>${notif}</b></div><button onclick="requestNotifications()" class="w-full py-3 rounded-xl bg-teal-600 text-white font-bold">Testar/ativar notificações</button><label class="flex justify-between p-3 rounded-xl bg-slate-50 dark:bg-slate-900"><span>Resposta por voz</span><input type="checkbox" ${S.settings.voice?'checked':''} onchange="S.settings.voice=this.checked;save()"></label><label class="flex justify-between p-3 rounded-xl bg-slate-50 dark:bg-slate-900"><span>Som nos lembretes</span><input type="checkbox" ${S.settings.sound?'checked':''} onchange="S.settings.sound=this.checked;save()"></label><label class="flex justify-between p-3 rounded-xl bg-teal-50 dark:bg-teal-950/40"><span><b>Lembrete falado na hora</b><small class="block text-xs text-slate-500">“Está na hora de tomar...”</small></span><input type="checkbox" ${S.settings.voiceReminders?'checked':''} onchange="S.settings.voiceReminders=this.checked;save()"></label></div>`)}${card('Backup e portabilidade',`<p class="text-xs text-slate-500 mb-3">Exporta os dados do protótipo para um arquivo JSON. Em produção, os dados devem ficar em servidor com autenticação, criptografia, controle de acesso e auditoria.</p><div class="grid grid-cols-2 gap-3"><button onclick="exportData()" class="py-3 rounded-xl border font-bold">Exportar</button><label class="py-3 rounded-xl border font-bold text-center cursor-pointer">Importar<input type="file" accept="application/json" onchange="importData(this)" class="hidden"></label></div>`)}${card('Documentos de saúde',`<div class="p-4 rounded-xl bg-slate-50 dark:bg-slate-900 text-xs">${S.documents.length?S.documents.map(d=>`<div>${esc(d.name)}</div>`).join(''):'Nenhum documento cadastrado.'}</div><p class="text-[11px] text-slate-400 mt-2">A estrutura está preparada para receitas, prescrições e documentos; o armazenamento seguro de arquivos ainda requer backend/serviço de documentos.</p>`)}${card('Auditoria',`<div class="max-h-48 overflow-auto text-[11px] space-y-1">${S.audit.slice(0,50).map(x=>`<div class="p-2 rounded bg-slate-50 dark:bg-slate-900">${esc(x)}</div>`).join('')}</div>`)}</div>`;
+    return `<div class="space-y-6"><h1 class="font-display text-2xl font-bold">Conta da família</h1>${card('Responsável',`<p class="text-sm"><b>${esc(S.account.owner?.name||S.fam.name)}</b><br><span class="text-xs text-slate-500">${esc(S.account.owner?.email||'')}</span></p>`)}${card('Perfis dos idosos',`<div class="space-y-2">${S.elders.map(e=>`<div class="p-3 rounded-2xl bg-slate-50 dark:bg-slate-900 flex items-center justify-between gap-3"><div><b>${esc(e.name)}</b><p class="text-xs text-slate-500">${e.age?e.age+' anos':'Idade não informada'} ${e.id===S.activeElderId?'· ativo':''}</p></div><div class="flex gap-2"><button onclick="selectElder('${e.id}')" class="px-3 py-2 rounded-xl bg-teal-600 text-white text-xs font-bold">Selecionar</button>${S.elders.length>1?`<button onclick="removeElder('${e.id}')" class="px-3 py-2 rounded-xl border border-rose-200 text-rose-600 text-xs font-bold">Remover</button>`:''}</div></div>`).join('')}</div><button onclick="addElder()" class="mt-3 w-full py-3 rounded-xl border-2 border-dashed border-teal-300 text-teal-700 font-bold">+ ADICIONAR OUTRO IDOSO</button>`)}${pinCard()}${card('Permissões do idoso',`<div class="space-y-2 text-sm"><div class="flex justify-between p-3 rounded-xl bg-slate-50 dark:bg-slate-900"><span>Ver medicamentos</span><b>Permitido</b></div><div class="flex justify-between p-3 rounded-xl bg-slate-50 dark:bg-slate-900"><span>Confirmar dose</span><b>Permitido</b></div><div class="flex justify-between p-3 rounded-xl bg-slate-50 dark:bg-slate-900"><span>Cadastrar/editar medicamento</span><b class="text-rose-600">Bloqueado</b></div><div class="flex justify-between p-3 rounded-xl bg-slate-50 dark:bg-slate-900"><span>Alterar estoque</span><b class="text-rose-600">Bloqueado</b></div><div class="flex justify-between p-3 rounded-xl bg-slate-50 dark:bg-slate-900"><span>Alterar conta</span><b class="text-rose-600">Bloqueado</b></div></div>`)}${card('Perfil local',`<div class="grid grid-cols-1 md:grid-cols-2 gap-3"><input id="elderName" class="field" value="${esc(S.elder.name)}" placeholder="Nome"><input id="elderAge" class="field" type="number" value="${S.elder.age}" placeholder="Idade"></div><button onclick="S.elder.name=$('#elderName').value;S.elder.age=+$('#elderAge').value||S.elder.age;save();render()" class="mt-3 px-4 py-2 rounded-xl bg-teal-600 text-white font-bold">Salvar perfil</button>`)}${card('Segurança da conta',`<p class="text-xs text-slate-500 mb-3">A senha pertence à conta do familiar. O idoso não altera senha, conta, medicamentos ou configurações administrativas.</p><div class="space-y-2"><input id="currentPassword" type="password" class="field" placeholder="Senha atual"><input id="newPassword" type="password" class="field" placeholder="Nova senha (mínimo 6 caracteres)"><input id="confirmPassword" type="password" class="field" placeholder="Confirmar nova senha"><button onclick="changePassword()" class="w-full py-3 rounded-xl bg-teal-600 text-white font-bold">ALTERAR SENHA</button></div><div class="mt-4 pt-4 border-t border-slate-200 dark:border-slate-700"><p class="text-xs text-slate-500 mb-2">PIN local deste dispositivo</p><button onclick="setPin()" class="px-4 py-2 rounded-xl border font-bold">${S.account.pinHash?'Alterar PIN':'Criar PIN'}</button></div>`)}${card('Notificações e voz',`<div class="space-y-3"><div class="text-xs">Permissão do navegador: <b>${notif}</b></div><button onclick="requestNotifications()" class="w-full py-3 rounded-xl bg-teal-600 text-white font-bold">Testar/ativar notificações</button><label class="flex justify-between p-3 rounded-xl bg-slate-50 dark:bg-slate-900"><span>Resposta por voz</span><input type="checkbox" ${S.settings.voice?'checked':''} onchange="S.settings.voice=this.checked;save()"></label><label class="flex justify-between p-3 rounded-xl bg-slate-50 dark:bg-slate-900"><span>Som nos lembretes</span><input type="checkbox" ${S.settings.sound?'checked':''} onchange="S.settings.sound=this.checked;save()"></label><label class="flex justify-between p-3 rounded-xl bg-teal-50 dark:bg-teal-950/40"><span><b>Lembrete falado na hora</b><small class="block text-xs text-slate-500">“Está na hora de tomar...”</small></span><input type="checkbox" ${S.settings.voiceReminders?'checked':''} onchange="S.settings.voiceReminders=this.checked;save()"></label></div>`)}${card('Backup e portabilidade',`<p class="text-xs text-slate-500 mb-3">Exporta os dados do protótipo para um arquivo JSON. Em produção, os dados devem ficar em servidor com autenticação, criptografia, controle de acesso e auditoria.</p><div class="grid grid-cols-2 gap-3"><button onclick="exportData()" class="py-3 rounded-xl border font-bold">Exportar</button><label class="py-3 rounded-xl border font-bold text-center cursor-pointer">Importar<input type="file" accept="application/json" onchange="importData(this)" class="hidden"></label></div>`)}${card('Documentos de saúde',`<div class="p-4 rounded-xl bg-slate-50 dark:bg-slate-900 text-xs">${S.documents.length?S.documents.map(d=>`<div>${esc(d.name)}</div>`).join(''):'Nenhum documento cadastrado.'}</div><p class="text-[11px] text-slate-400 mt-2">A estrutura está preparada para receitas, prescrições e documentos; o armazenamento seguro de arquivos ainda requer backend/serviço de documentos.</p>`)}${card('Auditoria',`<div class="max-h-48 overflow-auto text-[11px] space-y-1">${S.audit.slice(0,50).map(x=>`<div class="p-2 rounded bg-slate-50 dark:bg-slate-900">${esc(x)}</div>`).join('')}</div>`)}</div>`;
   };
 
   window.viewHelp = function(){ return `<div class="space-y-6 max-w-lg mx-auto"><div class="text-center"><div class="w-20 h-20 mx-auto rounded-3xl bg-rose-100 text-rose-600 flex items-center justify-center text-4xl"><i class="ph-bold ph-warning-circle"></i></div><h1 class="font-display text-2xl font-bold mt-3">Central de Ajuda</h1><p class="text-xs text-slate-500">Use os contatos cadastrados e os serviços de emergência da sua região.</p></div>${card('Ações rápidas',`<div class="grid gap-3"><a href="tel:192" class="py-4 rounded-2xl bg-rose-600 text-white font-bold text-center">LIGAR PARA O SAMU — 192</a><button onclick="S.alerts.unshift({id:'help-'+Date.now(),txt:'${esc(S.elder.name)} solicitou ajuda pelo CUIDAR+.',at:hm(nowM()),type:'help',severity:'high'});S.audit.unshift(new Date().toLocaleString('pt-BR')+' — pedido de ajuda');save();notify('CUIDAR+ — pedido de ajuda','${esc(S.elder.name)} solicitou ajuda.');alert('Pedido registrado neste dispositivo.');render()" class="py-4 rounded-2xl bg-amber-500 font-bold">ALERTAR FAMILIAR</button></div>`)}${card('Informação importante',`<p class="text-xs text-slate-600 dark:text-slate-300">O botão de emergência telefona pelo dispositivo. O alerta familiar deste protótipo é local; para avisar outro celular é necessário backend/push ou integração com um serviço de mensagens.</p>`)}</div>`; };
@@ -1436,10 +1459,12 @@ function render() {
     else {const s=nextSlot();speak(s?`O próximo é ${s.m.name}, ${s.dose}, às ${s.t}.`:'Não há mais doses programadas hoje.');}
   };
 
-  window.renderHeader = function(){ const fam=isFamily(); return `<header class="app-header"><div class="app-header-in"><div onclick="go('home')" class="brand" role="button" aria-label="Início"><div class="brand-logo"><i class="ph-bold ph-first-aid-kit"></i></div><div class="brand-txt"><b>CUIDAR+</b><span>${role==='elder'?'Idoso':'Familiar'}</span></div></div><div class="hdr-actions"><button onclick="S.fs=S.fs>=22?16:S.fs+2;save();render()" class="hdr-btn" aria-label="Tamanho da fonte" title="Tamanho da fonte"><i class="ph-bold ph-text-aa"></i><small>${S.fs}</small></button><button onclick="S.hc=!S.hc;save();render()" class="hdr-btn" aria-label="Alto contraste" title="Alto contraste"><i class="ph-bold ph-circle-half"></i></button><button onclick="go('account')" class="hdr-btn" aria-label="Conta e segurança" title="Conta e segurança"><i class="ph-bold ph-shield-check"></i></button>${fam?`<button onclick="openElderMode()" class="hdr-btn accent" aria-label="Abrir modo idoso" title="Modo idoso"><i class="ph-bold ph-user-switch"></i><span class="lbl">MODO IDOSO</span></button>`:`<button onclick="backToFamily()" class="hdr-btn accent" aria-label="Voltar à família" title="Voltar à família"><i class="ph-bold ph-user-switch"></i><span class="lbl">VOLTAR À FAMÍLIA</span></button>`}<button onclick="exitDemo()" class="hdr-btn danger" aria-label="Sair" title="Sair"><i class="ph-bold ph-sign-out"></i></button></div></div></header>`; };
+  window.renderHeader = function(){
+    const b='h-11 min-w-[44px] px-2 rounded-xl border border-slate-200 dark:border-slate-700 flex items-center justify-center gap-1 font-bold text-sm active:scale-95 transition';
+    return `<header class="sticky top-0 z-30 bg-white/90 dark:bg-slate-900/90 backdrop-blur-md border-b border-slate-200 dark:border-slate-800"><div class="max-w-7xl mx-auto px-3 sm:px-4 h-16 flex items-center justify-between gap-2"><div onclick="go('home')" class="flex items-center gap-2 cursor-pointer min-w-0"><div class="w-10 h-10 shrink-0 rounded-xl bg-teal-600 flex items-center justify-center text-white"><i class="ph-bold ph-first-aid-kit text-2xl"></i></div><div class="hidden min-[400px]:block leading-tight"><b class="font-display text-lg sm:text-xl text-teal-700 block">CUIDAR+</b><span class="text-[11px] px-2 py-0.5 rounded-full bg-teal-100 text-teal-800">${role==='elder'?'Idoso':'Familiar'}</span></div></div><div class="flex gap-1.5 shrink-0"><button aria-label="Tamanho da letra" onclick="S.fs=S.fs>=22?16:S.fs+2;save();render()" class="${b}">A<span class="text-xs">${S.fs}</span></button><button aria-label="Alto contraste" onclick="S.hc=!S.hc;save();render()" class="${b}"><i class="ph-bold ph-circle-half text-lg"></i></button>${isFamily()?`<button aria-label="Conta e segurança" onclick="go('account')" class="${b}"><i class="ph-bold ph-shield-check text-lg"></i></button><button aria-label="Abrir Modo Idoso" onclick="openElderMode()" class="${b} text-teal-700"><i class="ph-bold ph-user-circle text-lg"></i><span class="hidden sm:inline text-xs">MODO IDOSO</span></button>`:`<button aria-label="Voltar à família" onclick="backToFamily()" class="${b} text-teal-700"><i class="ph-bold ph-arrow-u-up-left text-lg"></i><span class="hidden sm:inline text-xs">VOLTAR À FAMÍLIA</span></button>`}<button aria-label="Sair" onclick="exitSession()" class="${b} text-rose-600 border-rose-200"><i class="ph-bold ph-sign-out text-lg"></i></button></div></div></header>`; };
 
-  window.renderSidebar = function(){ const isE=role==='elder'; const nav=isE?[['home','Início','ph-house'],['meds','Medicamentos','ph-pill'],['hist','Acompanhamento','ph-chart-line-up'],['share','Família','ph-users'],['help','Ajuda','ph-warning-octagon']]:[['home','Painel','ph-squares-four'],['meds','Medicamentos','ph-pill'],['hist','Relatórios','ph-chart-bar'],['share','Família','ph-users'],['account','Conta & Segurança','ph-shield-check']]; return `<aside class="hidden lg:flex flex-col w-64 bg-white dark:bg-slate-900 border-r border-slate-200 dark:border-slate-800 p-4 min-h-[calc(100vh-4rem)]"><div class="mb-5 p-3 rounded-2xl bg-teal-50 dark:bg-teal-950/40"><div class="text-3xl">${S.elder.avatar||'👵'}</div><b>${esc(S.elder.name)}</b><div class="text-xs text-slate-500">${S.elder.age} anos</div></div><nav class="space-y-1 flex-1">${nav.map(n=>`<button onclick="go('${n[0]}')" class="w-full flex gap-3 items-center px-4 py-3 rounded-xl text-sm ${tab===n[0]?'bg-teal-600 text-white':'hover:bg-slate-100 dark:hover:bg-slate-800'}"><i class="ph-bold ${n[2]} text-xl"></i>${n[1]}</button>`).join('')}</nav>${isE?`<div class="p-3 rounded-xl bg-slate-50 dark:bg-slate-800 text-xs font-bold">Modo simplificado ativo</div>`:''}</aside>`; };
-  window.renderBottomNav = function(){const isE=role==='elder', items=isE?[['home','Início','ph-house'],['meds','Remédios','ph-pill'],['hist','Histórico','ph-chart-line-up'],['help','Ajuda','ph-warning-octagon']]:[['home','Painel','ph-squares-four'],['meds','Remédios','ph-pill'],['hist','Relatórios','ph-chart-bar'],['share','Família','ph-users']];return `<div class="lg:hidden fixed bottom-0 left-0 right-0 z-40 bg-white/95 dark:bg-slate-900/95 border-t pt-1 px-1 pb-safe" style="-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px)"><div class="grid grid-cols-${items.length}">${items.map(x=>`<button onclick="go('${x[0]}')" class="py-2 min-h-[56px] text-center ${tab===x[0]?'text-teal-600 font-bold':'text-slate-500'}"><i class="ph-bold ${x[2]} text-2xl"></i><span class="block text-[10px]">${x[1]}</span></button>`).join('')}</div></div>`; };
+  window.renderSidebar = function(){ const isE=role==='elder'; const nav=isE?[['home','Início','ph-house'],['meds','Medicamentos','ph-pill'],['hist','Acompanhamento','ph-chart-line-up'],['share','Família','ph-users'],['help','Ajuda','ph-warning-octagon']]:[['home','Painel','ph-squares-four'],['meds','Medicamentos','ph-pill'],['hist','Relatórios','ph-chart-bar'],['share','Família','ph-users'],['account','Conta & Segurança','ph-shield-check']]; return `<aside class="hidden md:flex flex-col w-64 bg-white dark:bg-slate-900 border-r border-slate-200 dark:border-slate-800 p-4 min-h-[calc(100vh-4rem)]"><div class="mb-5 p-3 rounded-2xl bg-teal-50 dark:bg-teal-950/40"><div class="text-3xl">${S.elder.avatar||'👵'}</div><b>${esc(S.elder.name)}</b><div class="text-xs text-slate-500">${S.elder.age} anos</div></div><nav class="space-y-1 flex-1">${nav.map(n=>`<button onclick="go('${n[0]}')" class="w-full flex gap-3 items-center px-4 py-3 rounded-xl text-sm ${tab===n[0]?'bg-teal-600 text-white':'hover:bg-slate-100 dark:hover:bg-slate-800'}"><i class="ph-bold ${n[2]} text-xl"></i>${n[1]}</button>`).join('')}</nav>${isE?`<div class="p-3 rounded-xl bg-slate-50 dark:bg-slate-800 text-xs font-bold">Modo simplificado ativo</div>`:''}</aside>`; };
+  window.renderBottomNav = function(){const isE=role==='elder', items=isE?[['home','Início','ph-house'],['meds','Remédios','ph-pill'],['hist','Histórico','ph-chart-line-up'],['help','Ajuda','ph-warning-octagon']]:[['home','Painel','ph-squares-four'],['meds','Remédios','ph-pill'],['hist','Relatórios','ph-chart-bar'],['share','Família','ph-users']];return `<div class="md:hidden fixed bottom-0 left-0 right-0 z-40 bg-white/95 dark:bg-slate-900/95 border-t p-1"><div class="grid grid-cols-${items.length}">${items.map(x=>`<button onclick="go('${x[0]}')" class="py-2 text-center ${tab===x[0]?'text-teal-600 font-bold':'text-slate-500'}"><i class="ph-bold ${x[2]} text-2xl"></i><span class="block text-[10px]">${x[1]}</span></button>`).join('')}</div></div>`; };
 
   window.render = function(){
     document.body.classList.toggle('hc',S.hc); document.documentElement.style.setProperty('--app-fs',S.fs+'px'); const c=$('#app'); if(!c)return;
@@ -1447,7 +1472,7 @@ function render() {
     let content='';
     if(role==='elder'){switch(tab){case'meds':content=viewMeds();break;case'hist':content=viewHist();break;case'help':content=viewHelp();break;case'share':content=viewShare();break;case'account':content=viewElderHome();break;default:content=viewElderHome();}}
     else {switch(tab){case'meds':content=viewMeds();break;case'hist':content=viewHist();break;case'share':content=viewShare();break;case'account':content=viewAccount();break;default:content=viewFamHome();}}
-    c.innerHTML=`${renderHeader()}<div class="flex-1 max-w-7xl w-full mx-auto flex">${renderSidebar()}<main class="flex-1 p-4 sm:p-6 lg:p-8 pb-28 lg:pb-8 overflow-x-hidden">${content}</main></div>${renderBottomNav()}`;
+    c.innerHTML=`${renderHeader()}<div class="flex-1 max-w-7xl w-full mx-auto flex">${renderSidebar()}<main class="flex-1 p-4 sm:p-6 lg:p-8 pb-24 md:pb-8 overflow-x-hidden">${content}</main></div>${renderBottomNav()}`;
     if(role==='elder'){ c.querySelectorAll('[data-admin-only]').forEach(x=>x.remove()); }
   };
 
